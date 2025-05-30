@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mindset Wars - Level Up</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #0e0e0e; color: #fff; text-align: center; padding: 50px; }
+        .game-box { max-width: 700px; margin: auto; background: #1c1c1c; padding: 30px; border-radius: 10px; }
+        .question { margin-top: 40px; font-size: 22px; min-height: 60px; }
+        .btn { background: #ffcc00; border: none; padding: 15px 30px; font-size: 16px; cursor: pointer; margin: 10px; border-radius: 8px; }
+        .score { margin-top: 20px; font-size: 18px; }
+        .kofi-button {
+            display: inline-block;
+            margin-top: 30px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #29abe0;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-box">
+        <h1>Mindset Wars: Escape the Broke Matrix</h1>
+        <div class="question" id="question">Ready to break the cycle? Let's begin Level 1.</div>
+        <div id="choices">
+            <button class="btn" onclick="choose(0)">Start</button>
+        </div>
+        <div class="score" id="score">Mindset Coins: 0</div>
+        <a class="kofi-button" href="https://ko-fi.com/miskythegoat" target="_blank">☕ Support Me on Ko-fi</a>
+    </div>
+
+    <script>
+        const levels = [
+            {
+                name: "Level 1: Hustle Start",
+                questions: [
+                    { q: "You're broke. Start a hustle or wait for a job?", choices: ["Start a hustle", "Wait"], points: [10, -5] },
+                    { q: "You have $20. Buy data for TikTok or food?", choices: ["TikTok", "Food"], points: [10, 0] },
+                    { q: "Launch a T-shirt brand or write an ebook?", choices: ["T-shirt", "Ebook"], points: [5, 10] }
+                ]
+            },
+            {
+                name: "Level 2: Mindset Growth",
+                questions: [
+                    { q: "You hit burnout. Rest or push harder?", choices: ["Rest", "Push"], points: [5, 2] },
+                    { q: "Your content flops. Quit or improve?", choices: ["Improve", "Quit"], points: [10, -5] },
+                    { q: "Learn from a mentor or wing it?", choices: ["Mentor", "Wing it"], points: [10, -2] }
+                ]
+            },
+            {
+                name: "Level 3: Empire Building",
+                questions: [
+                    { q: "Make $1000. Reinvest or flex?", choices: ["Reinvest", "Flex"], points: [15, -10] },
+                    { q: "Opportunity to collab. Take it or solo grind?", choices: ["Collab", "Solo"], points: [10, 3] },
+                    { q: "Add AI to your business or ignore the trend?", choices: ["Use AI", "Ignore"], points: [20, -5] }
+                ]
+            }
+        ];
+
+        let level = 0;
+        let questionIndex = 0;
+        let score = 0;
+
+        function choose(choice) {
+            if (questionIndex === 0 && level === 0 && choice === 0) {
+                nextQuestion();
+                return;
+            }
+
+            const current = levels[level].questions[questionIndex];
+            score += current.points[choice];
+            questionIndex++;
+
+            if (questionIndex < levels[level].questions.length) {
+                updateQuestion();
+            } else {
+                level++;
+                questionIndex = 0;
+
+                if (level < levels.length) {
+                    document.getElementById("question").innerText = `🎯 ${levels[level].name}`;
+                    document.getElementById("choices").innerHTML = '<button class="btn" onclick="nextQuestion()">Next Level</button>';
+                } else {
+                    document.getElementById("question").innerText = "🔥 You escaped the Broke Matrix and built your empire!";
+                    document.getElementById("choices").innerHTML = "";
+                }
+            }
+            document.getElementById("score").innerText = "Mindset Coins: " + score;
+        }
+
+        function nextQuestion() {
+            updateQuestion();
+        }
+
+        function updateQuestion() {
+            const current = levels[level].questions[questionIndex];
+            document.getElementById("question").innerText = current.q;
+            document.getElementById("choices").innerHTML = `
+                <button class="btn" onclick="choose(0)">${current.choices[0]}</button>
+                <button class="btn" onclick="choose(1)">${current.choices[1]}</button>
+            `;
+        }
+    </script>
+</body>
+</html>
