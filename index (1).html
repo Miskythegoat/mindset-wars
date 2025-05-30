@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mindset Wars</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #0e0e0e; color: #fff; text-align: center; padding: 50px; }
+        button { background: #ffcc00; border: none; padding: 15px 30px; font-size: 18px; cursor: pointer; margin-top: 20px; }
+        .question { margin-top: 40px; font-size: 22px; }
+        .game-box { max-width: 600px; margin: 0 auto; background: #1c1c1c; padding: 30px; border-radius: 10px; }
+        .kofi-button {
+            display: inline-block;
+            margin-top: 30px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #29abe0;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-box">
+        <h1>Mindset Wars: Escape the Broke Matrix</h1>
+        <div class="question" id="question">You wake up and realize you’re broke. What’s your first move?</div>
+        <button onclick="next()">Start Hustle</button>
+        <br>
+        <a class="kofi-button" href="https://ko-fi.com/miskythegoat" target="_blank">☕ Support Me on Ko-fi</a>
+    </div>
+
+    <script>
+        const questions = [
+            "You decide to sell a product online. What do you choose: Digital course or T-shirt?",
+            "Someone offers you a shady deal. Fast cash but risky. Take it or pass?",
+            "Your content starts going viral. Reinvent your brand or stay niche?",
+            "You have $100. Reinvest in ads or save it for a rainy day?",
+            "You face burnout. Take a break or push through?"
+        ];
+        let index = 0;
+
+        function next() {
+            index++;
+            if (index < questions.length) {
+                document.getElementById("question").innerText = questions[index];
+            } else {
+                document.getElementById("question").innerText = "You escaped the Broke Matrix. Welcome to Level 2!";
+            }
+        }
+    </script>
+</body>
+</html>
